@@ -1,5 +1,7 @@
 package application.controller;
 
-public class MainController {
+import javafx.scene.control.*;
 
+public class MainController {
+	
 }

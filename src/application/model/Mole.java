@@ -1,5 +1,5 @@
 package application.model;
 
-public class WhackAMole {
-	
+public class Mole {
+
 }
