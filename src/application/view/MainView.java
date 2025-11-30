@@ -9,7 +9,7 @@ public class MainView {
 	ImageView[] imageViews;
 	
 	public void displayTimeRemaining(String time) {
-		
+		timeRemainingLabel.setText(time);
 	}
 	
 	public void displayLabel(String score) {
@@ -17,6 +17,6 @@ public class MainView {
 	}
 	
 	public void displayImage(int index, Image image) {
-		
+		imageViews[index].setImage(image);
 	}
 }
