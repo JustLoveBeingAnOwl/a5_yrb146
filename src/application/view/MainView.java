@@ -4,9 +4,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 
 public class MainView {
-	Label timeRemainingLabel;
-	Label scoreLabel;
-	ImageView[] imageViews;
+	private Label timeRemainingLabel;
+	private Label scoreLabel;
+	private ImageView[] imageViews;
 	
 	public void displayTimeRemaining(String time) {
 		timeRemainingLabel.setText(time);
