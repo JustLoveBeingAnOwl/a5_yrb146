@@ -13,5 +13,7 @@ public class WhackAMole {
 	private int totalScore;
 	private boolean gameIsOver;
 	
-	
+	public WhackAMole() {
+		
+	}
 }
