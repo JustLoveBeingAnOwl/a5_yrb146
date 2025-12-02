@@ -11,9 +11,29 @@ public class WhackAMole {
 	private boolean[] exposed;
 	private Random rand;
 	private int totalScore;
-	private boolean gameIsOver;
+	private boolean gameIsOver = true; //there is no game at start, so default to gameOver
 	
 	public WhackAMole() {
+		
+	}
+	
+	public void startGame() {
+		
+	}
+	
+	public void endGame() {
+		
+	}
+	
+	public void setExposed(int index, boolean expsd) {
+		
+	}
+	
+	public synchronized void updateScore(int responseTimeMillis) {
+		
+	}
+	
+	public void whackMole(int index) {
 		
 	}
 }
