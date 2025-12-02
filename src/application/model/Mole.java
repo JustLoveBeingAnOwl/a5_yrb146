@@ -11,6 +11,30 @@ public class Mole implements Runnable {
 	int index;
 	Random rand;
 
+	public Mole(WhackAMole game, MainView mainView, Image moleImage, int index) {
+		this.game = game;
+		this.mainView = mainView;
+		this.moleImage = moleImage;
+		this.index = index;
+	}
+	
+	public void setGame(WhackAMole game) {
+		this.game = game;
+	}
+	public void setMainView(MainView mainView) {
+		this.mainView = mainView;
+	}
+	public void setMoleImage(Image moleImage) {
+		this.moleImage = moleImage;
+	}
+	public void setIndex(int index) {
+		this.index = index;
+	}
+	
+	public int getIndex() {
+		return index;
+	}
+	
 	@Override
 	public synchronized void run() {
 		// TODO Auto-generated method stub

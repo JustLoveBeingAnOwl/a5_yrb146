@@ -9,11 +9,11 @@ public class MainView {
 	private ImageView[] imageViews;
 	
 	public void displayTimeRemaining(String time) {
-		timeRemainingLabel.setText(time);
+		timeRemainingLabel.setText("Time Remaining:	"+time);
 	}
 	
 	public void displayLabel(String score) {
-		scoreLabel.setText(score);
+		scoreLabel.setText("Score:	"+score);
 	}
 	
 	public void displayImage(int index, Image image) {
