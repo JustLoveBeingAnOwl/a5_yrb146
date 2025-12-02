@@ -16,12 +16,20 @@ public class WhackAMole {
 	public WhackAMole() {
 		
 	}
-	
-	public void startGame() {
+
+	public void startGame(){
 		
 	}
-	
-	public void endGame() {
+
+	public void endGame(){
+		
+	}
+
+	public void gameOver(){
+		
+	}
+
+	public void updateScore(){
 		
 	}
 	

@@ -47,10 +47,20 @@ public class CountDownTimer implements Runnable {
 	 */
 	@Override
 	public synchronized void run() {
-		durationsSeconds = 30;
-		for(int i = durationsSeconds; i >= 0; i--) {
-			int timeLeft = i;
+		DurationsSeconds = 30;
+		while(DurationsSeconds > 0 && !Thread.currentThread().isInterrupted()) {
+			try {
+				Thread.sleep(1000);
+			} catch(InterruptedException e) {
+				Thread.currentThread().interrupt();
+				break;
+			}
+			
+			DurationsSeconds--;
+			mainView.displayTimeRemaining(String.valueOf(DurationsSeconds));
 		}
+		
+		game.endGame();
 	}
 
 }
