@@ -16,4 +16,28 @@ public class WhackAMole {
 	public WhackAMole() {
 		
 	}
+
+	public void startGame(){
+		
+	}
+
+	public void endGame(){
+		
+	}
+
+	public void gameOver(){
+		
+	}
+
+	public void updateScore(){
+		
+	}
+
+	public void setExposed(){
+		
+	}
+
+	public void whackMole(){
+		
+	}
 }
