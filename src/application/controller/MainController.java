@@ -26,5 +26,11 @@ public class MainController {
 	public void initialize() {
 		
 	}
-	
+	public void startButtonAction(){
+		
+	}
+
+	public void imageViewAction(){
+		
+	}
 }
