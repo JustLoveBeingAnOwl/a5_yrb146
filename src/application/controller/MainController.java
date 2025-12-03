@@ -29,6 +29,8 @@ public class MainController {
 		mainView = new MainView();
 		mainView.setScoreLabel(scoreLabel);
 		mainView.setTimeRemainingLabel(timeRemainingLabel);
+		mainView.setImageViews(imageView0, imageView1, imageView2, imageView3, imageView4);
+		mainView.setMoleImage(new Image("/mole-1.png"));
 		game = new WhackAMole(mainView);
 	}
 	
