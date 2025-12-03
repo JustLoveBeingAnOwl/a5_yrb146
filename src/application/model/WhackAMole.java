@@ -13,28 +13,69 @@ public class WhackAMole {
 	private int totalScore;
 	private boolean gameIsOver = true; //there is no game at start, so default to gameOver
 	
-	public WhackAMole() {
-		
+	public WhackAMole(MainView mainView) {
+		this.mainView = mainView;
+		this.moles = new Mole[5];
+		this.moleThreads = new Thread[5];
+		this.exposed = new boolean[5];
+		this.totalScore = 0;
+		this.rand = new Random();
 	}
 
 	public void startGame(){
-		
+		if(gameIsOver) {
+			gameIsOver = true;
+			totalScore = 0;
+			
+			timer = new CountDownTimer(this, mainView); //timer will always be 30 seconds
+			Thread timerThread = new Thread(timer);
+			timerThread.setDaemon(true);
+			timerThread.start();
+			
+			for(int i = 0; i<5;i++) {
+				moles[i] = new Mole(this, mainView, mainView.getMoleImage(), i);
+				moleThreads[i] = new Thread(moles[i]);
+				moleThreads[i].setDaemon(true);
+				moleThreads[i].start();
+			}
+		}
 	}
 
+	
+	/**
+	 * this ends the game once the countdown timer reaches 0.
+	 * it is called in the CountDownTimer's run() method. 
+	 */
 	public void endGame(){
-		
+		gameIsOver = true;
+		for(int i = 0; i < 5; i++) {
+			if(moleThreads[i] != null && moleThreads[i].isAlive()) {
+				moleThreads[i].interrupt();
+			}
+		}
 	}
 
-	public void gameOver(){
-		
+	public synchronized boolean gameOver(){
+		return gameIsOver;
 	}
 
-	public void updateScore(){
+	public void updateScore(int elap){
+		if(elap < 500) {
+			totalScore += 100;
+		}
+		else if(elap < 1000) {
+			totalScore += 50;
+		}
+		else {
+			totalScore += 10;
+		}
 		
+		mainView.displayScoreLabel(String.valueOf(totalScore));
 	}
 	
 	public void setExposed(int index, boolean expsd) {
-		
+		exposed[index] = expsd;
+		mainView.displayImage(ind, isExposed ? moleImage : blank);
 	}
 	
 	public synchronized void updateScore(int responseTimeMillis) {
@@ -42,6 +83,10 @@ public class WhackAMole {
 	}
 	
 	public void whackMole(int index) {
-		
+		if(exposed[ind]) {
+			if(moleThreads[ind] != null) {
+				moleThreads[ind].interrupt();
+			}
+		}
 	}
 }

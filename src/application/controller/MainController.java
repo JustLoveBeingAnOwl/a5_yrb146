@@ -1,5 +1,6 @@
 package application.controller;
 
+import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
@@ -9,6 +10,7 @@ import application.view.*;
 
 public class MainController {
 	private WhackAMole game;
+	private MainView mainView;
 	@FXML private Label timeRemainingLabel;
 	@FXML private Label scoreLabel;
 	@FXML private ImageView imageView0;
