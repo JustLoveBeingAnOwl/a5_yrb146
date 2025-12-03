@@ -6,7 +6,13 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Parent;
 
+/**
+ * Main class for the Whack-A-Mole Game
+ */
 public class Main extends Application {
+	/**
+	 * JavaFX start method.
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
@@ -21,6 +27,11 @@ public class Main extends Application {
 		}
 	}
 	
+	/**
+	 * Main method.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

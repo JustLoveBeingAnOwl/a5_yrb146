@@ -8,6 +8,9 @@ import javafx.scene.layout.*;
 import application.model.*;
 import application.view.*;
 
+/**
+ * MainController class for the program.
+ */
 public class MainController {
 	private WhackAMole game;
 	private MainView mainView;
@@ -25,6 +28,10 @@ public class MainController {
 	@FXML private Pane pane3;
 	@FXML private Pane pane4;
 	
+	/**
+	 * Initialization method sets up borders for the panes, sets and passes an array of the imageViews,
+	 * and creates and sets up mainView and WhackAMole instances 
+	 */
 	public void initialize() {
 		Pane[] panes = {pane0, pane1, pane2, pane3, pane4};
 		for(Pane p : panes) {
@@ -48,11 +55,23 @@ public class MainController {
 		game = new WhackAMole(mainView);
 	}
 	
+	/**
+	 * FXML action method for the start button.
+	 * Simply calls startGame() to start the game.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void startButtonAction(ActionEvent event ){
 		game.startGame();
 	}
 
+	/**
+	 * FXML event button for when someone clicks on a mole's space.
+	 * gets the source, gets the user data, and then passes it to a call of the whackMole() method.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void imageViewAction(Event event){
 		ImageView image = (ImageView) event.getSource();

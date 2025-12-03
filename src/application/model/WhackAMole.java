@@ -29,6 +29,11 @@ public class WhackAMole {
 		this.rand = new Random();
 	}
 
+	/**
+	 * Start game method starts a new game by setting gameIsOver to false and totalScore to 0.
+	 * It then creates a new timer, new threads for the timer, fills the array with newly-created moles
+	 * (and starts the associated threads) and also defaults the exposed array to false.
+	 */
 	public void startGame(){
 		if(gameIsOver) {
 			gameIsOver = false;
@@ -63,10 +68,25 @@ public class WhackAMole {
 		}
 	}
 
+	/**
+	 * a sort of getter method to see if game is over.
+	 * used in mole as a means of checking what caused a run to end.
+	 * 
+	 * @return
+	 */
 	public boolean gameOver(){
 		return gameIsOver;
 	}
 
+	/**
+	 * Updates score based on how many milliseconds it took to click on a mole.
+	 * <500 adds 100 points.
+	 * <1000 adds 50 points.
+	 * anything slower only adds 10.
+	 * unless the mole disappeared already.
+	 * 
+	 * @param elap
+	 */
 	public synchronized void updateScore(int elap){
 		if(elap < 500) {
 			totalScore += 100;
@@ -81,10 +101,23 @@ public class WhackAMole {
 		Platform.runLater(() -> mainView.displayScoreLabel(String.valueOf(totalScore)));
 	} 
 	
+	/**
+	 * sets the status for a mole's associated exposed status
+	 * as used in mole.java
+	 * 
+	 * @param index
+	 * @param expsd
+	 */
 	public void setExposed(int index, boolean expsd) {
 		exposed[index] = expsd;
 	}
 	
+	/**
+	 * the actual method for when a mole is whacked, 
+	 * interrupts the mole thread based on exposure status.
+	 * 
+	 * @param index
+	 */
 	public void whackMole(int index) {
 		if(exposed[index]) {
 			if(moleThreads[index] != null) {
