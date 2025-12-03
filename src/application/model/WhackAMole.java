@@ -59,12 +59,23 @@ public class WhackAMole {
 		return gameIsOver;
 	}
 
-	public void updateScore(){
+	public void updateScore(int elap){
+		if(elap < 500) {
+			totalScore += 100;
+		}
+		else if(elap < 1000) {
+			totalScore += 50;
+		}
+		else {
+			totalScore += 10;
+		}
 		
+		mainView.displayScoreLabel(String.valueOf(totalScore));
 	}
 	
 	public void setExposed(int index, boolean expsd) {
 		exposed[index] = expsd;
+		mainView.displayImage(ind, isExposed ? moleImage : blank);
 	}
 	
 	public synchronized void updateScore(int responseTimeMillis) {
@@ -72,6 +83,10 @@ public class WhackAMole {
 	}
 	
 	public void whackMole(int index) {
-		
+		if(exposed[ind]) {
+			if(moleThreads[ind] != null) {
+				moleThreads[ind].interrupt();
+			}
+		}
 	}
 }
