@@ -26,23 +26,31 @@ public class MainController {
 	@FXML private Pane pane4;
 	
 	public void initialize() {
-		mainView = new MainView();
-		mainView.setScoreLabel(scoreLabel);
-		mainView.setTimeRemainingLabel(timeRemainingLabel);
-		mainView.setImageViews(imageView0, imageView1, imageView2, imageView3, imageView4);
-		mainView.setMoleImage(new Image("/mole-1.png"));
-		game = new WhackAMole(mainView);
+		Pane[] panes = {pane0, pane1, pane2, pane3, pane4};
+		for(Pane p : panes) {
+			p.setStyle("-fx-border-color: black; -fx-border-width: 2;");
+		}
+		
+		ImageView[] views = {imageView0, imageView1, imageView2, imageView3, imageView4};
+		int i = 0;
+		for(ImageView v : views) {
+			v.setUserData(i);
+			i++;
+		}
+		
+		Image moleImage = new Image(getClass().getResourceAsStream("/application/mole-1.png"));
+		Image blank = null;
+		
+		MainView view = new MainView(timeRemainingLabel, scoreLabel, views);
+		game = new WhackAMole(view, moleImage, blank);
 	}
-	
-	@FXML
-	public void startButtonAction(ActionEvent event){
+	public void startButtonAction(){
 		game.startGame();
 	}
-	
-	@FXML
-	public void imageViewAction(Event event){
-		ImageView obj = (ImageView) event.getSource();
-		int index = (int) obj.getUserData();
-		game.whackMole(index);
+
+	public void imageViewAction(){
+		ImageView image = (ImageView)e.getSource();
+		int ind = (int) image.getUserData();
+		game.whackMole(ind);
 	}
 }
