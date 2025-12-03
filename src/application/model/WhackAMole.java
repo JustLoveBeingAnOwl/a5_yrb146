@@ -22,11 +22,12 @@ public class WhackAMole {
 		this.exposed = new boolean[5];
 		this.totalScore = 0;
 		this.rand = new Random();
+		this.moleImage = moleImage;
 	}
 
 	public void startGame(){
 		if(gameIsOver) {
-			gameIsOver = true;
+			gameIsOver = false;
 			totalScore = 0;
 			
 			timer = new CountDownTimer(this, mainView); //timer will always be 30 seconds
@@ -35,11 +36,12 @@ public class WhackAMole {
 			timerThread.start();
 			
 			for(int i = 0; i<5;i++) {
-				moles[i] = new Mole(this, mainView, mainView.getMoleImage(), i);
+				moles[i] = new Mole(this, mainView, mainView.getMoleImage(), i, rand);
 				moleThreads[i] = new Thread(moles[i]);
 				moleThreads[i].setDaemon(true);
 				moleThreads[i].start();
 			}
+			Arrays.fill(exposed, false);
 		}
 	}
 
@@ -77,7 +79,12 @@ public class WhackAMole {
 	
 	public void setExposed(int index, boolean expsd) {
 		exposed[index] = expsd;
-		mainView.displayImage(index, moleImage);
+		
+		if(expsd) {
+			mainView.displayImage(index, moleImage);
+		} else {
+			mainView.displayImage(index, null);
+		}
 	}
 	
 	public void whackMole(int index) {

@@ -11,11 +11,12 @@ public class Mole implements Runnable {
 	int index;
 	Random rand;
 
-	public Mole(WhackAMole game, MainView mainView, Image moleImage, int index) {
+	public Mole(WhackAMole game, MainView mainView, Image moleImage, int index, Random rand) {
 		this.game = game;
 		this.mainView = mainView;
 		this.moleImage = moleImage;
 		this.index = index;
+		this.rand = rand;
 	}
 	
 	public void setGame(WhackAMole game) {
