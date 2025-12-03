@@ -2,6 +2,7 @@ package application.model;
 
 import java.util.*;
 import application.view.MainView;
+import javafx.application.Platform;
 
 public class WhackAMole {
 	private MainView mainView;
@@ -77,8 +78,8 @@ public class WhackAMole {
 			totalScore += 10;
 		}
 		
-		mainView.displayScoreLabel(String.valueOf(totalScore));
-	}
+		Platform.runLater(() -> mainView.displayScoreLabel(String.valueOf(totalScore)));
+	} 
 	
 	public void setExposed(int index, boolean expsd) {
 		exposed[index] = expsd;

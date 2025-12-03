@@ -1,6 +1,7 @@
 package application.model;
 
 import application.view.MainView;
+import javafx.application.Platform;
 
 /**
  * The CountDownTimer class stores a timer that counts down from 30 seconds,
@@ -57,7 +58,7 @@ public class CountDownTimer implements Runnable {
 			}
 			
 			durationsSeconds--;
-			mainView.displayTimeRemaining(String.valueOf(durationsSeconds));
+			Platform.runLater(() -> mainView.displayTimeRemaining(String.valueOf(durationsSeconds)));
 		}
 		
 		game.endGame();

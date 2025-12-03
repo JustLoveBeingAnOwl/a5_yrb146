@@ -22,11 +22,11 @@ public class MainView {
 	}
 	
 	public void displayTimeRemaining(String time) {
-		timeRemainingLabel.setText("Time Remaining:	"+time);
+		timeRemainingLabel.setText(time);
 	}
 	
 	public void displayScoreLabel(String score) {
-		scoreLabel.setText("Score:	"+score);
+		scoreLabel.setText(score);
 	}
 	
 	public void displayImage(int index, Image image) {
