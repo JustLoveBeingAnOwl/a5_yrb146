@@ -43,11 +43,13 @@ public class Mole implements Runnable {
 		    try {
 		        // hide mole
 		        game.setExposed(index, false);
+		        mainView.displayImage(index, null);
 		        Thread.sleep(2000 + rand.nextInt(3001));
 
 		        // show mole
 		        exposureStart = System.currentTimeMillis();
 		        game.setExposed(index, true);
+		        mainView.displayImage(index, moleImage);
 		        Thread.sleep(1000 + rand.nextInt(1001));
 
 		        // if not interrupted, hide again.

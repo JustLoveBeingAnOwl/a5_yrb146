@@ -2,7 +2,6 @@ package application.model;
 
 import java.util.*;
 import application.view.MainView;
-import javafx.scene.image.*;
 
 public class WhackAMole {
 	private MainView mainView;
@@ -13,7 +12,6 @@ public class WhackAMole {
 	private Random rand;
 	private int totalScore;
 	private boolean gameIsOver = true; //there is no game at start, so default to gameOver
-	private Image moleImage;
 	
 	/**
 	 * Constructor for WhackAMole.java
@@ -21,14 +19,13 @@ public class WhackAMole {
 	 * @param mainView
 	 * @param moleImage
 	 */
-	public WhackAMole(MainView mainView, Image moleImage) {
+	public WhackAMole(MainView mainView) {
 		this.mainView = mainView;
 		this.moles = new Mole[5];
 		this.moleThreads = new Thread[5];
 		this.exposed = new boolean[5];
 		this.totalScore = 0;
 		this.rand = new Random();
-		this.moleImage = moleImage;
 	}
 
 	public void startGame(){
@@ -65,7 +62,7 @@ public class WhackAMole {
 		}
 	}
 
-	public synchronized boolean gameOver(){
+	public boolean gameOver(){
 		return gameIsOver;
 	}
 
@@ -85,12 +82,6 @@ public class WhackAMole {
 	
 	public void setExposed(int index, boolean expsd) {
 		exposed[index] = expsd;
-		
-		if(expsd) {
-			mainView.displayImage(index, moleImage);
-		} else {
-			mainView.displayImage(index, null);
-		}
 	}
 	
 	public void whackMole(int index) {

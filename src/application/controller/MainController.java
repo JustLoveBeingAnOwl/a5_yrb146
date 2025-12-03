@@ -45,12 +45,15 @@ public class MainController {
 		mainView.setMoleImage(moleImage);
 		mainView.setScoreLabel(scoreLabel);
 		mainView.setTimeRemainingLabel(timeRemainingLabel);
-		game = new WhackAMole(mainView, moleImage);
+		game = new WhackAMole(mainView);
 	}
+	
+	@FXML
 	public void startButtonAction(ActionEvent event ){
 		game.startGame();
 	}
 
+	@FXML
 	public void imageViewAction(Event event){
 		ImageView image = (ImageView) event.getSource();
 		int index = (int) image.getUserData();
