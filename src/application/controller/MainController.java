@@ -1,5 +1,6 @@
 package application.controller;
 
+import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
@@ -9,6 +10,7 @@ import application.view.*;
 
 public class MainController {
 	private WhackAMole game;
+	private MainView mainView;
 	@FXML private Label timeRemainingLabel;
 	@FXML private Label scoreLabel;
 	@FXML private ImageView imageView0;
@@ -24,13 +26,21 @@ public class MainController {
 	@FXML private Pane pane4;
 	
 	public void initialize() {
-		
+		mainView = new MainView();
+		mainView.setScoreLabel(scoreLabel);
+		mainView.setTimeRemainingLabel(timeRemainingLabel);
+		game = new WhackAMole(mainView);
 	}
-	public void startButtonAction(){
-		
+	
+	@FXML
+	public void startButtonAction(ActionEvent event){
+		game.startGame();
 	}
-
-	public void imageViewAction(){
-		
+	
+	@FXML
+	public void imageViewAction(Event event){
+		ImageView obj = (ImageView) event.getSource();
+		int index = (int) obj.getUserData();
+		game.whackMole(index);
 	}
 }

@@ -13,8 +13,10 @@ public class WhackAMole {
 	private int totalScore;
 	private boolean gameIsOver = true; //there is no game at start, so default to gameOver
 	
-	public WhackAMole() {
-		
+	public WhackAMole(MainView mainView) {
+		moles = new Mole[5];
+		moleThreads = new Thread[5];
+		totalScore = 0;
 	}
 
 	public void startGame(){

@@ -8,6 +8,14 @@ public class MainView {
 	private Label scoreLabel;
 	private ImageView[] imageViews;
 	
+	public void setTimeRemainingLabel(Label timeRemainingLabel) {
+		this.timeRemainingLabel = timeRemainingLabel;
+	}
+	
+	public void setScoreLabel(Label scoreLabel) {
+		this.scoreLabel = scoreLabel;
+	}
+	
 	public void displayTimeRemaining(String time) {
 		timeRemainingLabel.setText("Time Remaining:	"+time);
 	}
