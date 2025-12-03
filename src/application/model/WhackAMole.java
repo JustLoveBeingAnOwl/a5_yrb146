@@ -34,6 +34,9 @@ public class WhackAMole {
 			
 			for(int i = 0; i<5;i++) {
 				moles[i] = new Mole(this, mainView, mainView.getMoleImage(), i);
+				moleThreads[i] = new Thread(moles[i]);
+				moleThreads[i].setDaemon(true);
+				moleThreads[i].start();
 			}
 		}
 	}
@@ -46,12 +49,14 @@ public class WhackAMole {
 	public void endGame(){
 		gameIsOver = true;
 		for(int i = 0; i < 5; i++) {
-			
+			if(moleThreads[i] != null && moleThreads[i].isAlive()) {
+				moleThreads[i].interrupt();
+			}
 		}
 	}
 
-	public void gameOver(){
-		
+	public synchronized boolean gameOver(){
+		return gameIsOver;
 	}
 
 	public void updateScore(){
@@ -59,7 +64,7 @@ public class WhackAMole {
 	}
 	
 	public void setExposed(int index, boolean expsd) {
-		
+		exposed[index] = expsd;
 	}
 	
 	public synchronized void updateScore(int responseTimeMillis) {
