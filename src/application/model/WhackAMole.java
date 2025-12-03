@@ -15,6 +15,12 @@ public class WhackAMole {
 	private boolean gameIsOver = true; //there is no game at start, so default to gameOver
 	private Image moleImage;
 	
+	/**
+	 * Constructor for WhackAMole.java
+	 * 
+	 * @param mainView
+	 * @param moleImage
+	 */
 	public WhackAMole(MainView mainView, Image moleImage) {
 		this.mainView = mainView;
 		this.moles = new Mole[5];
