@@ -38,6 +38,34 @@ public class Mole implements Runnable {
 	@Override
 	public synchronized void run() {
 		// TODO Auto-generated method stub
-		
+		while (!game.gameOver()) {
+            try {
+                game.setExposed(index, false);
+                mainView.displayImage(index, null);
+
+                Thread.sleep(2000 + rand.nextInt(3001));
+
+                game.exposureStart[index] = System.currentTimeMillis();
+                game.setExposed(index, true);
+                mainView.displayImage(index, moleImage);
+
+                Thread.sleep(1000 + rand.nextInt(1001));
+
+                game.setExposed(index, false);
+                mainView.displayImage(index, null);
+            } catch (InterruptedException e) {
+                if (game.gameOver()) {
+                    return;
+                }
+
+                long elapsed = System.currentTimeMillis() - game.exposureStart[index];
+                if (elapsed < 0) elapsed = 0;
+                game.updateScore((int) elapsed);
+
+                game.setExposed(index, false);
+                mainView.displayImage(index, null);
+
+            }
+        }
 	}
 }
