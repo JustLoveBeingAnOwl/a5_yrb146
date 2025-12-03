@@ -5,11 +5,12 @@ import application.view.MainView;
 import javafx.scene.image.*;
 
 public class Mole implements Runnable {
-	WhackAMole game;
-	MainView mainView;
-	Image moleImage;
-	int index;
-	Random rand;
+	private WhackAMole game;
+	private MainView mainView;
+	private Image moleImage;
+	private int index;
+	private Random rand;
+	private long exposureStart; //variable to determine when exposure begins.
 
 	public Mole(WhackAMole game, MainView mainView, Image moleImage, int index, Random rand) {
 		this.game = game;
@@ -38,35 +39,28 @@ public class Mole implements Runnable {
 	
 	@Override
 	public synchronized void run() {
-		// TODO Auto-generated method stub
 		while (!game.gameOver()) {
-            try {
-                game.setExposed(index, false);
-                mainView.displayImage(index, null);
+		    try {
+		        // hide mole
+		        game.setExposed(index, false);
+		        Thread.sleep(2000 + rand.nextInt(3001));
 
-                Thread.sleep(2000 + rand.nextInt(3001));
+		        // show mole
+		        exposureStart = System.currentTimeMillis();
+		        game.setExposed(index, true);
+		        Thread.sleep(1000 + rand.nextInt(1001));
 
-                game.exposureStart[index] = System.currentTimeMillis();
-                game.setExposed(index, true);
-                mainView.displayImage(index, moleImage);
+		        // if not interrupted, hide again.
+		        game.setExposed(index, false);
 
-                Thread.sleep(1000 + rand.nextInt(1001));
+		    } catch (InterruptedException e) {
+		        if (game.gameOver()) return; // game ended
 
-                game.setExposed(index, false);
-                mainView.displayImage(index, null);
-            } catch (InterruptedException e) {
-                if (game.gameOver()) {
-                    return;
-                }
+		        long elapsed = System.currentTimeMillis() - exposureStart;
+		        game.updateScore((int) elapsed);
 
-                long elapsed = System.currentTimeMillis() - game.exposureStart[index];
-                if (elapsed < 0) elapsed = 0;
-                game.updateScore((int) elapsed);
-
-                game.setExposed(index, false);
-                mainView.displayImage(index, null);
-
-            }
-        }
+		        game.setExposed(index, false);
+		    }
+		}
 	}
 }
