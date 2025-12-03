@@ -39,18 +39,21 @@ public class MainController {
 		}
 		
 		Image moleImage = new Image(getClass().getResourceAsStream("/application/mole-1.png"));
-		Image blank = null;
 		
-		MainView view = new MainView(timeRemainingLabel, scoreLabel, views);
-		game = new WhackAMole(view, moleImage, blank);
+		mainView = new MainView();
+		mainView.setImageViews(views);
+		mainView.setMoleImage(moleImage);
+		mainView.setScoreLabel(scoreLabel);
+		mainView.setTimeRemainingLabel(timeRemainingLabel);
+		game = new WhackAMole(mainView, moleImage);
 	}
-	public void startButtonAction(){
+	public void startButtonAction(ActionEvent event ){
 		game.startGame();
 	}
 
-	public void imageViewAction(){
-		ImageView image = (ImageView)e.getSource();
-		int ind = (int) image.getUserData();
-		game.whackMole(ind);
+	public void imageViewAction(Event event){
+		ImageView image = (ImageView) event.getSource();
+		int index = (int) image.getUserData();
+		game.whackMole(index);
 	}
 }

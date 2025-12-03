@@ -2,6 +2,7 @@ package application.model;
 
 import java.util.*;
 import application.view.MainView;
+import javafx.scene.image.*;
 
 public class WhackAMole {
 	private MainView mainView;
@@ -12,8 +13,9 @@ public class WhackAMole {
 	private Random rand;
 	private int totalScore;
 	private boolean gameIsOver = true; //there is no game at start, so default to gameOver
+	private Image moleImage;
 	
-	public WhackAMole(MainView mainView) {
+	public WhackAMole(MainView mainView, Image moleImage) {
 		this.mainView = mainView;
 		this.moles = new Mole[5];
 		this.moleThreads = new Thread[5];
@@ -59,7 +61,7 @@ public class WhackAMole {
 		return gameIsOver;
 	}
 
-	public void updateScore(int elap){
+	public synchronized void updateScore(int elap){
 		if(elap < 500) {
 			totalScore += 100;
 		}
@@ -75,17 +77,13 @@ public class WhackAMole {
 	
 	public void setExposed(int index, boolean expsd) {
 		exposed[index] = expsd;
-		mainView.displayImage(ind, isExposed ? moleImage : blank);
-	}
-	
-	public synchronized void updateScore(int responseTimeMillis) {
-		
+		mainView.displayImage(index, moleImage);
 	}
 	
 	public void whackMole(int index) {
-		if(exposed[ind]) {
-			if(moleThreads[ind] != null) {
-				moleThreads[ind].interrupt();
+		if(exposed[index]) {
+			if(moleThreads[index] != null) {
+				moleThreads[index].interrupt();
 			}
 		}
 	}
